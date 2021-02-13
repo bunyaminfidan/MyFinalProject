@@ -7,13 +7,15 @@ using System;
 namespace ConsoleUI
 {
     //SOLID O Harfi: Open Closed Principle Yeni özelllik ekliyorsan mevcuttaki koduna dokunmayacaksın
+    //DTO Data Transformation Object join kullanarak yazılan sql sorgusu
 
     class Program
     {
         static void Main(string[] args)
         {
-            // ProductTest();
-            CategoryGetAllTest();
+            ProductTest();
+            //CategoryGetAllTest();
+
 
         }
 
@@ -31,9 +33,9 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetByUnitPrice(1, 200))
+            foreach (var product in productManager.GetProductDetails())
             {
-                Console.WriteLine(product.ProductName);
+                Console.WriteLine(product.ProductName + " / "+ product.CategoryName );
             }
         }
     }
