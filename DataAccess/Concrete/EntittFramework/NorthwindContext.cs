@@ -18,5 +18,6 @@ namespace DataAccess.Concrete.EntittFramework
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Costumer> Costumers { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
