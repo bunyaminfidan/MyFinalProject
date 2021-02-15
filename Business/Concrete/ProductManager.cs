@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constans;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -21,23 +23,44 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public List<Product> GelAllByCategoryId(int id)
+        public IResult Add(Product product)
         {
-            return _productDal.GetAll(p=>p.CategoryId==id);
+            //business kodlar buraya yaz
+
+            if (product.ProductName.Length < 2)
+            {
+                //magic string: stringleri ayrı yarı yazmak
+                return new ErrorResult(Messages.ProductNameInValid);
+            }
+            _productDal.Add(product);
+
+            return new SuccessResult(Messages.ProductAdded);
         }
 
-        public List<Product> GetAll()
+        public List<Product> GelAllByCategoryId(int id)
+        {
+            return _productDal.GetAll(p => p.CategoryId == id);
+        }
+
+        public IDataResult<List<Product>> GetAll()
         {
             //İş kodları buraya gelecek
             //Login olmuş ve yetkisi varsa artık DataAccess'a erişebilir.
 
-            return _productDal.GetAll();
+            
+            return new DataResult<List<Product>>(_productDal.GetAll(), true, "Ürünler Listelendi");
+
+        }
+
+        public Product GetById(int productId)
+        {
+            return _productDal.Get(p => p.ProductId == productId);
 
         }
 
         public List<Product> GetByUnitPrice(decimal min, decimal max)
         {
-            return _productDal.GetAll(p=>p.UnitPrice >=min  && p.UnitPrice<=max);
+            return _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
         }
 
         public List<ProductDetailDto> GetProductDetails()
