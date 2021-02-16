@@ -16,8 +16,6 @@ namespace DataAccess.Concrete.EntittFramework
     {
         public List<ProductDetailDto> GetProductDetail()
         {
-
-
             using (NorthwindContext context = new NorthwindContext())
             {
                 var result = from p in context.Products
