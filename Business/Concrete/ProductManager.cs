@@ -46,10 +46,11 @@ namespace Business.Concrete
         {
             //İş kodları buraya gelecek
             //Login olmuş ve yetkisi varsa artık DataAccess'a erişebilir.
-            if (DateTime.Now.Hour == 21)
-            {
-                return new ErrorDataResult<List<Product>>(Messages.MainTenanceTime);
-            }
+
+            //if (DateTime.Now.Hour == 21)
+            //{
+            //    return new ErrorDataResult<List<Product>>(Messages.MainTenanceTime);
+            //}
 
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductListed);
 
@@ -68,10 +69,10 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            if (DateTime.Now.Hour == 21)
-            {
-                return new ErrorDataResult<List<ProductDetailDto>>(Messages.MainTenanceTime);
-            }
+            //if (DateTime.Now.Hour == 00)
+            //{
+            //    return new ErrorDataResult<List<ProductDetailDto>>(Messages.MainTenanceTime);
+            //}
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetail());
         }
 
