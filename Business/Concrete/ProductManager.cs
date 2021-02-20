@@ -47,10 +47,10 @@ namespace Business.Concrete
             //İş kodları buraya gelecek
             //Login olmuş ve yetkisi varsa artık DataAccess'a erişebilir.
 
-            //if (DateTime.Now.Hour == 21)
-            //{
-            //    return new ErrorDataResult<List<Product>>(Messages.MainTenanceTime);
-            //}
+            if (DateTime.Now.Hour == 15)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.MainTenanceTime);
+            }
 
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductListed);
 

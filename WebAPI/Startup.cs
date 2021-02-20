@@ -33,6 +33,7 @@ namespace WebAPI
 
             // Birisi senden IProductService istersen ona arkaplanda  ProductManager oluþtur ve onun adrsini ver demek.
             //içerisinde data tutmuyorsak kullanýlýr. Sepette kullanýlmaz.
+            //AOP için IOC kullanýlacak
             services.AddSingleton<IProductService,ProductManager>();
             services.AddSingleton<IProductDal, EfProductDal>();
         }
