@@ -25,8 +25,15 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
-            //business kodlar buraya yaz
 
+            //validation : doğrulama kodu: yapısaal olarak iş koduna göndermeye müsait mi ona bakar.
+            //business : iş kodu İş gereksinimlerine uygunluk. Ehliyet alacak gerekli kontrol.Sınavdan geçmiş mi.
+
+
+            if (product.UnitPrice<=0)
+            {
+                return new ErrorResult(Messages.UnitPriceInValid);
+            }
             if (product.ProductName.Length < 2)
             {
                 //magic string: stringleri ayrı yarı yazmak
