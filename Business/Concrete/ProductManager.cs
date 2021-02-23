@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,15 +33,19 @@ namespace Business.Concrete
             //business : iş kodu İş gereksinimlerine uygunluk. Ehliyet alacak gerekli kontrol.Sınavdan geçmiş mi.
 
 
-            if (product.UnitPrice<=0)
-            {
-                return new ErrorResult(Messages.UnitPriceInValid);
-            }
-            if (product.ProductName.Length < 2)
-            {
-                //magic string: stringleri ayrı yarı yazmak
-                return new ErrorResult(Messages.ProductNameInValid);
-            }
+            //if (product.UnitPrice<=0)
+            //{
+            //    return new ErrorResult(Messages.UnitPriceInValid);
+            //}
+            //if (product.ProductName.Length < 2)
+            //{
+            //    //magic string: stringleri ayrı yarı yazmak
+            //    return new ErrorResult(Messages.ProductNameInValid);
+            //}  
+            //YERİNE fluentvalidation kullanıldı.
+
+            ValidationTool.Validate(new ProductValidator(), product);
+
             _productDal.Add(product);
 
             return new SuccessResult(Messages.ProductAdded);
