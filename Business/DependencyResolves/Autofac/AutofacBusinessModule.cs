@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Business.DependencyResolves.Autofac
 {
-    public class AutofacBusinessModule: Module //using Autofac; eklendi
+    public class AutofacBusinessModule : Module //using Autofac; eklendi
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -22,6 +22,11 @@ namespace Business.DependencyResolves.Autofac
 
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+
+
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

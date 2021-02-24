@@ -16,6 +16,8 @@ namespace Business.Constans
         public static string MainTenanceTime = "Bakım zamanı";
         public static string ProductListed = "Ürünler listelendi";
         public static string UnitPriceInValid = "Ürün fiyatı ismi geçersiz";
-
+        public static string ProductCountOfCategoryError = "Ürün sayısı en fazla 10 olabilir";
+        public static string ProductNameAllReadyExist = "Bu isimde zaten başka bir ürün var";
+        public static string CheckIfCategoryLimitExceded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
     }
 }
