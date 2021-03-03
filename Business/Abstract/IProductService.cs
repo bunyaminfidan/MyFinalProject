@@ -18,5 +18,13 @@ namespace Business.Abstract
         IDataResult<Product> GetById(int productId);
         IResult Add(Product product);
         IResult Update(Product product);
+
+
+        //------//
+        //Uygulamalarda tutarlılığı kontrol etmek için kullanılan yöntem
+        //100 liram var eft yaptım
+        //10 lira gönderdim benden düştü para
+        //karşı tarafa para yyatmadı işlem iptal edilmesi gerekir.
+        IResult AddTransactionalTest(Product product);
     }
 }

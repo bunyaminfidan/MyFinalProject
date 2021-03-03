@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Aspects.Autofac.Transaction;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace Core.Utilities.Interceptors
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
+            classAttributes.Add(new TransactionScopeAspect()); //Performans yönetimi için.
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
