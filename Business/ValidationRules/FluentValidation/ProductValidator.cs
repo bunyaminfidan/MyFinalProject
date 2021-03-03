@@ -16,7 +16,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.ProductName).MinimumLength(2); //min 2 karakter olmalı
             RuleFor(p => p.UnitPrice).NotEmpty(); //boş olamaz
             RuleFor(p => p.UnitPrice).GreaterThan(0); // 0 dan büyük olmalı.
-            RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1); //Category 1 olunca fiyat 10 dan büyük olmalı
+           //RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1); //Category 1 olunca fiyat 10 dan büyük olmalı
           //  RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalıdır.");//kendimiz metod yazabiliriz.
         }
 

@@ -129,7 +129,7 @@ namespace Business.Concrete
             //bu kodu çalıştırır.
             //Linq sorgusu
             var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
-            if (result >= 10)
+            if (result >= 250)
             {
                 return new ErrorResult(Messages.ProductCountOfCategoryError);
             }
