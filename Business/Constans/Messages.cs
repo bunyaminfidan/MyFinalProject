@@ -21,12 +21,21 @@ namespace Business.Constans
         public static string ProductCountOfCategoryError = "Ürün sayısı en fazla 10 olabilir";
         public static string ProductNameAllReadyExist = "Bu isimde zaten başka bir ürün var";
         public static string CheckIfCategoryLimitExceded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
+
         public static string AuthorizationDenied = "Yetkiniz yok";
-        public static string UserRegistered="";
-        public static string UserNotFound="";
-        public static string PasswordError="";
-        public static string SuccessfulLogin="";
-        public static string UserAlreadyExists= "";
-        public static string AccessTokenCreated= "";
+        public static string UserRegistered = "Kayıt oldu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Parola hatalı";
+        public static string SuccessfulLogin = "Başarılı giriş";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string AccessTokenCreated = "Token oluşturuldu";
+
+        public static string UserAdded = "Kullanıcı eklendi";
+        //public static string UserUpdated = "Kullanıcı güncellendi";
+        //public static string UserDeleted = "Kullanıcı silinidi";
+        //public static string GetAllUserListed = "Kullanıcılar listelendi";
+        //public static string GetByUserIdListed = "Seçili kullanıcı listelendi";
+
+
     }
 }

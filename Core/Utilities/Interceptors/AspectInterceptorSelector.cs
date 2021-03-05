@@ -17,7 +17,7 @@ namespace Core.Utilities.Interceptors
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));
-            classAttributes.Add(new TransactionScopeAspect()); //Performans yönetimi için.
+            classAttributes.Add(new TransactionScopeAspect()); //Hata sırasında işlemleri geri almak  için.
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }

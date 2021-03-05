@@ -43,7 +43,7 @@ namespace Business.Concrete
         {
             //business codes
 
-            //validation : doğrulama kodu: yapısaal olarak iş koduna göndermeye müsait mi ona bakar.
+            //validation : doğrulama kodu: yapısal olarak iş koduna göndermeye müsait mi ona bakar.
             //business : iş kodu İş gereksinimlerine uygunluk. Ehliyet alacak gerekli kontrol.Sınavdan geçmiş mi.
 
 
