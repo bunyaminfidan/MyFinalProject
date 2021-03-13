@@ -32,8 +32,8 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-
-            Thread.Sleep(5000);
+            //bir saniye bekle
+            Thread.Sleep(1000);
             //Dependency chain: Bağımlılık zinciri 
             //Swagger: Api için döküman oluşturur.
             var result = _productService.GetAll();
@@ -49,6 +49,17 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _productService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int id)
+        {
+            var result = _productService.GelAllByCategoryId(id);
             if (result.Success)
             {
                 return Ok(result);
