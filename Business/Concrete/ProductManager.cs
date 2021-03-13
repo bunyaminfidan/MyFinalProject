@@ -29,7 +29,7 @@ namespace Business.Concrete
         //category tablosunu ilgilendiren kuralda service enjekte edilir. ....Dal değil.
         ICategoryService _categoryService;
 
-        //Bir manager kendşis haricinde başka bir ...Dal'ı enjekte edemez.
+        //Bir manager kendisi haricinde başka bir ...Dal'ı enjekte edemez.
         public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
@@ -38,7 +38,7 @@ namespace Business.Concrete
 
         [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
+        [CacheAspect]
         public IResult Add(Product product)
         {
             //business codes
@@ -122,7 +122,7 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(ProductValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
+        [CacheRemoveAspect("IProductService.Get")] //içerisinde bu parametre olan tüm cacheleri siler
         //içinde geçenleri siler.
         public IResult Update(Product product)
         {

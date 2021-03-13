@@ -85,6 +85,8 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.ConfigureCustomExceptionMiddleware(); //biz ekledik. api hata yönetimi için
+
             app.UseCors(buileder => buileder.WithOrigins("http://localhost:4200").AllowAnyHeader());
             //Þu adresten gelen tüm get post put delete iþlemlerine izin ver ben bu sayfaya güveniyorum demek.
 
