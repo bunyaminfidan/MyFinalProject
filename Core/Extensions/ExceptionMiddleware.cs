@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Extensions
 {
-    public class ExceptionMiddleware 
+    public class ExceptionMiddleware
     {
         private RequestDelegate _next;
 
@@ -35,11 +36,24 @@ namespace Core.Extensions
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             string message = "Internal Server Error";
+            IEnumerable<ValidationFailure> errors;
             if (e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
+                errors = ((ValidationException)e).Errors; //hatayı list olarak dönüyoruz.
+                httpContext.Response.StatusCode = 400;
+
+
+                //Validatioon hatası olursa bu kod çalışır
+                return httpContext.Response.WriteAsync(new ValidationErrorDetails
+                {
+                    StatusCode = 400,    // httpContext.Response.StatusCode = 400; //Bad request. hata validation hatası olduğu için  sistem hatası değil
+                    Message = message, // iptal edilmesinde fayda var. Sistem ile ilgili bilgi veriyor.
+                    ValidationErrors = errors
+                }.ToString());
             }
 
+            //sistem hata verirse bu kod çalışır
             return httpContext.Response.WriteAsync(new ErrorDetails
             {
                 StatusCode = httpContext.Response.StatusCode,
