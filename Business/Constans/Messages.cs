@@ -14,6 +14,8 @@ namespace Business.Constans
     public static class Messages
     {
         public static string ProductAdded = "Ürün Eklendi";
+        public static string ProductUpdated = "Ürün Güncellendi";
+        public static string ProductDeleted = "Ürün Silindi";
         public static string ProductNameInValid = "Ürün ismi geçersiz";
         public static string MainTenanceTime = "Bakım zamanı";
         public static string ProductListed = "Ürünler listelendi";

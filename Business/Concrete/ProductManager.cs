@@ -36,7 +36,7 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-        //[SecuredOperation("product.add")]
+        [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheAspect]
         public IResult Add(Product product)
@@ -84,7 +84,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
-       [CacheAspect]
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             //İş kodları buraya gelecek
@@ -120,13 +120,25 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetail());
         }
 
-
+        [SecuredOperation("product.update")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")] //içerisinde bu parametre olan tüm cacheleri siler
         //içinde geçenleri siler.
         public IResult Update(Product product)
         {
-            throw new NotImplementedException();
+            IResult result = BusinessRules.Run(
+                CheckIfProductNameExists(product.ProductName),
+                CheckIfProductCountOfCategoryCorrect(product.CategoryId),
+                CheckIfCategoryLimitExceded());
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            _productDal.Update(product);
+
+            return new SuccessResult(Messages.ProductUpdated);
         }
         //iş kuralı parçacığı olduğu için private sadece bu managerde
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
@@ -165,10 +177,19 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        
+
         public IResult AddTransactionalTest(Product product)
         {
             throw new NotImplementedException();
+        }
+
+        [SecuredOperation("product.delete")]
+        [CacheRemoveAspect("IProductService.Get")] //içerisinde bu parametre olan tüm cacheleri siler
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+
+            return new SuccessResult(Messages.ProductDeleted);
         }
     }
 }
